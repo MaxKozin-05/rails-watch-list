@@ -1,0 +1,34 @@
+<div class="min-vh-100 text-black">
+
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h1 class="display-4" style="font-weight: 300;"><%= @list.name %></h1>
+      <%= link_to "Add Bookmark", new_list_bookmark_path(@list), class: "btn btn-danger me-2" %>
+      <%= link_to "Back to Lists", lists_path, class: "btn btn-danger me-2" %>
+    </div>
+
+    <div class="row justify-content-center">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="card bg-dark text-white h-100 shadow border-start border-5 border-danger">
+
+            <% if bookmark.movie.poster_url.present? %>
+              <%= image_tag bookmark.movie.poster_url, style: "height: 250px; object-fit: cover; object-position: top;" %>
+            <% else %>
+              <%= image_tag "https://via.placeholder.com/400x250?text=No+Image", class: "card-img-top grayscale" %>
+            <% end %>
+
+            <div class="card-body text-center">
+              <h5 class="card-title"><%= bookmark.movie.title %></h5>
+              <p class="card-text"><%= bookmark.comment %></p>
+              <%= link_to "Delete", bookmark_path(bookmark),
+                          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                          class: "btn btn-outline-danger btn-sm" %>
+            </div>
+
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

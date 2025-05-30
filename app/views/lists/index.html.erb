@@ -1,0 +1,42 @@
+<div class="text-white text-center py-5 mb-4"
+     style="background-image: url('https://wallpapercave.com/wp/wp10249661.jpg'); background-size: cover; background-position: bottom;
+     height:400px;">
+  <div class="container">
+      <div data-controller="header">
+        <h1
+          class="display-4 text-white text-center"
+          data-header-target="title"
+          data-action="click->header#toggle">
+          Explore Your Movie Lists
+        </h1>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5">
+
+  <div class="text-center mb-5">
+    <%= link_to "Create New List", new_list_path, class: "btn btn-dark btn-lg" %>
+  </div>
+
+  <div class="row justify-content-center">
+    <% @lists.each do |list| %>
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card h-100 shadow">
+
+          <% if list.photo_url.present? %>
+            <%= image_tag list.photo_url, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag "https://via.placeholder.com/400x200?text=No+Image", class: "card-img-top" %>
+          <% end %>
+
+          <div class="card-body text-center">
+            <h5 class="card-title"><%= list.name %></h5>
+            <%= link_to "View List", list_path(list), class: "btn btn-outline-dark btn-sm mt-2" %>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

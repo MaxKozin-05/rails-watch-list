@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100 text-white"
+  style="background-image: url('https://i.pinimg.com/736x/c8/6f/a7/c86fa7fd5a93f4402631bde333bb755b.jpg'); background-size: cover; background-position: center;">
+
+  <div class="card bg-dark text-white p-4 shadow" style="width: 100%; max-width: 500px;">
+
+    <h1 class="text-center mb-4" style="font-weight: 300;">Add a Bookmark to "<%= @list.name %>"</h1>
+
+    <%= simple_form_for [@list, @bookmark] do |f| %>
+      <div class="mb-3">
+        <%= f.association :movie, prompt: "Choose a movie", input_html: { class: 'form-select bg-black text-white border-secondary' } %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.input :comment, input_html: { class: 'form-control bg-black text-white border-secondary' }, label_html: { class: 'text-white' } %>
+      </div>
+
+      <div class="text-center">
+        <%= f.button :submit, "Add Bookmark", class: "btn btn-danger px-4" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= link_to "Back to List", list_path(@list), class: "text-white text-decoration-underline" %>
+    </div>
+
+  </div>
+</div>
